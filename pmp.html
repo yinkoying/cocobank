@@ -129,13 +129,13 @@
         ];
 
         const wbsData = [
-            { id: "1.0", task: "專案啟動 (Initiating)", owner: "PMO", status: "Done", date: "2026/03/15", color: "bg-blue-600" },
-            { id: "2.0", task: "產品與系統規劃 (Planning)", owner: "PMO/IT", status: "Done", date: "2026/04/30", color: "bg-blue-600" },
+            { id: "1.0", task: "專案啟動", owner: "PMO", status: "Done", date: "2026/03/15", color: "bg-blue-600" },
+            { id: "2.0", task: "產品與系統規劃", owner: "PMO/IT", status: "Done", date: "2026/04/30", color: "bg-blue-600" },
             { id: "3.0", task: "風險規章與契約審查", owner: "風控/法遵", status: "Done", date: "2026/05/31", color: "bg-indigo-600" },
             { id: "4.0", task: "系統開發與 SIT", owner: "資訊處", status: "Done", date: "2026/06/15", color: "bg-indigo-600" },
             { id: "5.0", task: "UAT 使用者驗收測試", owner: "企金作業", status: "Done", date: "2026/06/30", color: "bg-purple-600" },
-            { id: "6.0", task: "教育訓練與試點 (Pilot)", owner: "企金商品", status: "Done", date: "2026/07/31", color: "bg-purple-600" },
-            { id: "7.0", task: "正式上市 (Go-Live)", owner: "全行", status: "Released", date: "2026/08/15", color: "bg-green-600" }
+            { id: "6.0", task: "教育訓練與試點", owner: "企金商品", status: "Done", date: "2026/07/31", color: "bg-purple-600" },
+            { id: "7.0", task: "正式上市", owner: "全行", status: "Released", date: "2026/08/15", color: "bg-green-600" }
         ];
 
         const SimpleDoughnut = () => (
@@ -265,7 +265,7 @@
                                 <div className="w-4 h-4 rounded-full bg-green-500 border-4 border-green-100 z-10 box-content"></div>
                                 <div>
                                     <div className="text-sm font-bold text-[#002D56]">08/15</div>
-                                    <div className="text-slate-800 font-medium">產品正式上市 (Go-Live)</div>
+                                    <div className="text-slate-800 font-medium">產品正式上市</div>
                                 </div>
                             </div>
                         </div>
@@ -279,7 +279,7 @@
                 <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                     <h3 className="font-bold text-[#002D56] text-lg flex items-center gap-2">
                         <Icon path={icons.alert} className="w-5 h-5 text-[#C5A065]" />
-                        風險登記表 (Risk Register)
+                        風險登記表
                     </h3>
                 </div>
                 <div className="overflow-x-auto">
@@ -328,7 +328,7 @@
                 <div className="p-6 border-b border-slate-100 bg-slate-50/50">
                     <h3 className="font-bold text-[#002D56] text-lg flex items-center gap-2">
                         <Icon path={icons.clock} className="w-5 h-5 text-[#C5A065]" />
-                        專案進度表 (WBS)
+                        專案進度表
                     </h3>
                 </div>
                 <div className="p-10">
@@ -389,7 +389,7 @@
                      <div className="flex justify-between items-center mb-6">
                         <h3 className="font-bold text-[#002D56] text-lg flex items-center gap-2">
                             <Icon path={icons.file} className="w-5 h-5 text-[#C5A065]" />
-                            文件中心 (DMS)
+                            文件中心
                         </h3>
                         <div className="relative">
                             <input type="text" placeholder="搜尋文件..." className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#002D56] w-64" />
