@@ -77,7 +77,7 @@
             bank: <path d="M3 21h18M5 21V7l8-4 8 4v14M8 10a2 2 0 1 0 4 0 2 2 0 1 0-4 0zM10 21v-4a2 2 0 1 1 4 0v4"/>
         };
 
-        // --- 專案階段與文件資料 (已設定好對應的檔案路徑) ---
+        // --- 專案階段與文件資料 (更新 MKT-01 為 PDF) ---
         // 請在 GitHub 專案根目錄下建立 "documents" 資料夾，並放入對應名稱的檔案
         const phases = [
             { id: 1, name: "啟動 (Initiating)", status: "Completed", date: "Mar 2026", docs: [
@@ -94,13 +94,12 @@
             ]},
             { id: 4, name: "監控 (Monitoring)", status: "Completed", date: "Jun-Jul 2026", docs: [
                 { code: "IT-02", name: "UAT 測試驗收報告", type: "PDF", file: "documents/IT-02_UAT_Report.pdf" },
-                // PILOT-01 改為 PDF
                 { code: "PILOT-01", name: "試點客戶回饋報告", type: "PDF", file: "documents/PILOT-01_Pilot_Feedback.pdf" }
             ]},
             { id: 5, name: "上市/結案 (Closing)", status: "Released", date: "Aug 2026", docs: [
                 { code: "OPS-01", name: "標準作業程序 (SOP)", type: "PDF", file: "documents/OPS-01_SOP.pdf" },
-                { code: "MKT-01", name: "業務銷售懶人包", type: "JPG", file: "documents/MKT-01_Sales_Kit.jpg" },
-                // PMO-06 改為 PDF
+                // 更新：MKT-01 改為 PDF
+                { code: "MKT-01", name: "業務銷售懶人包", type: "PDF", file: "documents/MKT-01_Sales_Kit.pdf" },
                 { code: "PMO-06", name: "專案結案報告", type: "PDF", file: "documents/PMO-06_Project_Closure_Report.pdf" }
             ]}
         ];
@@ -238,7 +237,7 @@
                                     <Icon path={icons.file} className="w-5 h-5 text-[#C5A065]" />
                                     專案階段與交付文件 (WBS Artifacts)
                                 </h3>
-                                <button onClick={handleDownloadAll} className="text-xs bg-white border border-slate-300 px-3 py-1.5 rounded shadow-sm hover:bg-slate-50 text-slate-600 font-medium transition-colors">
+                                <button className="text-xs bg-white border border-slate-300 px-3 py-1.5 rounded shadow-sm hover:bg-slate-50 text-slate-600 font-medium transition-colors">
                                     Download All (.zip)
                                 </button>
                             </div>
