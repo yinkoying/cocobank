@@ -3,217 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SME SLL Sales Kit | 業務銷售懶人包</title>
+    <title>SME SLL Sales Kit | 業務銷售懶人包 (Professional A4)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #e2e8f0; display: flex; justify-content: center; padding: 40px; }
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            background-color: #525659; /* 瀏覽器背景深灰，凸顯 A4 紙張 */
+            display: flex; 
+            justify-content: center; 
+            padding: 40px; 
+            margin: 0;
+        }
         
-        /* 模擬 A4 尺寸海報 */
-        .poster-container {
-            width: 800px;
-            min-height: 1131px; /* A4 比例 */
+        /* A4 尺寸設定 (210mm x 297mm) */
+        .a4-container {
+            width: 210mm;
+            height: 297mm;
             background-color: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            /* 讓網頁預覽時不要太大，設定縮放基準 */
+            transform-origin: top center;
         }
 
-        .bg-navy { background-color: #003366; }
-        .text-navy { color: #003366; }
-        .bg-gold { background-color: #C5A065; }
-        .text-gold { color: #C5A065; }
-        .border-gold { border-color: #C5A065; }
-        
-        .diagonal-bg {
-            background: linear-gradient(135deg, #003366 0%, #001a33 100%);
-            position: relative;
+        /* 銀行專業配色系統 */
+        :root {
+            --bank-navy: #003366;
+            --bank-gold: #C5A065;
+            --text-dark: #333333;
+            --bg-light: #F8F9FA;
         }
+
+        .text-serif { font-family: 'Noto Serif TC', serif; }
+        .bg-navy { background-color: var(--bank-navy); }
+        .text-navy { color: var(--bank-navy); }
+        .border-navy { border-color: var(--bank-navy); }
+        .bg-gold { background-color: var(--bank-gold); }
+        .text-gold { color: var(--bank-gold); }
         
-        .diagonal-bg::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
+        /* 表格樣式優化 */
+        .pro-table {
             width: 100%;
-            height: 60px;
-            background: white;
-            clip-path: polygon(0 100%, 100% 0, 100% 100%);
+            border-collapse: collapse;
+            font-size: 13px; /* A4 適合的字級 */
         }
+        .pro-table th {
+            background-color: #f1f5f9;
+            color: var(--bank-navy);
+            font-weight: 700;
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 2px solid var(--bank-navy);
+        }
+        .pro-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4b5563;
+            vertical-align: middle;
+        }
+        .pro-table tr:last-child td { border-bottom: none; }
 
-        .highlight-card {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border-top: 4px solid #C5A065;
+        /* 列印設定 */
+        @media print {
+            body { 
+                background: none; 
+                padding: 0; 
+                margin: 0; 
+            }
+            .fixed { display: none !important; } /* 隱藏下載按鈕 */
+            .a4-container {
+                width: 100%;
+                height: 100%;
+                box-shadow: none;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 下載按鈕 (列印時隱藏) -->
-    <div class="fixed top-5 right-5 z-50 flex gap-2 print:hidden">
-        <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 font-bold transition-colors">
-            <i class="fa-solid fa-download mr-2"></i>下載/列印 (PDF/圖片)
+    <!-- 下載/列印按鈕 -->
+    <div class="fixed top-5 right-5 z-50 flex gap-2">
+        <button onclick="window.print()" class="bg-gray-800 text-white px-4 py-2 rounded shadow hover:bg-gray-700 font-medium text-sm transition-colors flex items-center gap-2">
+            <i class="fa-solid fa-print"></i> 列印 / 存為 PDF
         </button>
     </div>
 
-    <!-- 海報本體 -->
-    <div class="poster-container" id="poster">
+    <!-- A4 文件本體 -->
+    <div class="a4-container">
         
-        <!-- Header: 吸睛標題 -->
-        <header class="diagonal-bg text-white p-10 pb-16">
-            <div class="flex justify-between items-start mb-6">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-building-columns text-[#C5A065] text-2xl"></i>
-                    <span class="font-bold text-xl tracking-wider">可可商業銀行</span>
+        <!-- Header: 專業頁首 -->
+        <header class="bg-navy text-white px-10 py-8 flex justify-between items-start">
+            <div>
+                <div class="flex items-center gap-2 mb-2 text-gold opacity-90">
+                    <i class="fa-solid fa-building-columns text-sm"></i>
+                    <span class="text-xs font-bold tracking-widest uppercase">Coco Commercial Bank</span>
                 </div>
-                <div class="bg-[#C5A065] text-[#003366] px-3 py-1 rounded font-bold text-sm">
-                    全行法金 RM 專用
-                </div>
+                <h1 class="text-3xl font-bold font-serif mb-1">中小企業永續連結貸款</h1>
+                <p class="text-sm font-light text-gray-300">SME Sustainability Linked Loan (SLL) Product Guide</p>
             </div>
-            
-            <h1 class="text-5xl font-black mb-4 leading-tight">
-                <span class="text-[#C5A065]">碳費時代來了！</span><br>
-                一張證書，立刻降息
-            </h1>
-            <p class="text-xl font-light opacity-90 max-w-2xl">
-                總行最新力作：中小企業永續連結貸款 (SME SLL)<br>
-                協助您的客戶無痛轉型，把「減碳」變成「減碼」。
-            </p>
+            <div class="text-right">
+                <div class="bg-white/10 px-3 py-1 rounded text-xs text-gold border border-white/20 mb-1 inline-block">
+                    內部限閱 (Internal Use Only)
+                </div>
+                <p class="text-xs text-gray-400">生效日：2026/08/15</p>
+            </div>
         </header>
 
-        <!-- Body Content -->
-        <main class="flex-1 px-10 py-6 flex flex-col gap-8">
-            
-            <!-- Section 1: 產品亮點 -->
+        <!-- Main Content -->
+        <main class="flex-1 px-10 py-8 flex flex-col gap-6">
+
+            <!-- 1. 產品亮點 (3 Columns) -->
             <section>
-                <div class="flex gap-4 mb-6">
-                    <!-- Highlight 1 -->
-                    <div class="flex-1 bg-blue-50 p-4 rounded-lg text-center highlight-card">
-                        <div class="w-12 h-12 bg-[#003366] rounded-full flex items-center justify-center text-white mx-auto mb-3 text-xl">
-                            <i class="fa-solid fa-check"></i>
+                <div class="flex items-center gap-2 mb-3 border-b border-gray-200 pb-2">
+                    <div class="w-1 h-5 bg-gold"></div>
+                    <h2 class="text-lg font-bold text-navy">產品亮點 (Key Benefits)</h2>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <!-- Point 1 -->
+                    <div class="bg-gray-50 p-4 rounded border-l-4 border-navy">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-file-circle-check text-gold"></i>
+                            <h3 class="font-bold text-gray-800 text-sm">流程簡化</h3>
                         </div>
-                        <h3 class="font-bold text-lg text-[#003366] mb-1">夠簡單</h3>
-                        <p class="text-sm text-gray-600">認證書、不認報告書<br>有證書就打折</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            無需撰寫 ESG 報告書，憑<span class="font-bold text-navy">有效證書</span>即可申請，大幅降低進件門檻。
+                        </p>
                     </div>
-                    <!-- Highlight 2 -->
-                    <div class="flex-1 bg-blue-50 p-4 rounded-lg text-center highlight-card">
-                        <div class="w-12 h-12 bg-[#C5A065] rounded-full flex items-center justify-center text-white mx-auto mb-3 text-xl">
-                            <i class="fa-solid fa-arrow-trend-down"></i>
+                    <!-- Point 2 -->
+                    <div class="bg-gray-50 p-4 rounded border-l-4 border-navy">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-percent text-gold"></i>
+                            <h3 class="font-bold text-gray-800 text-sm">實質減碼</h3>
                         </div>
-                        <h3 class="font-bold text-lg text-[#003366] mb-1">有感降息</h3>
-                        <p class="text-sm text-gray-600">利率直接減碼<br><span class="font-bold text-red-600 text-lg">3~5 bps</span></p>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            依證書等級提供 <span class="font-bold text-red-700">3 ~ 5 bps</span> 利率減碼，直接降低客戶資金成本。
+                        </p>
                     </div>
-                    <!-- Highlight 3 -->
-                    <div class="flex-1 bg-blue-50 p-4 rounded-lg text-center highlight-card">
-                        <div class="w-12 h-12 bg-[#003366] rounded-full flex items-center justify-center text-white mx-auto mb-3 text-xl">
-                            <i class="fa-solid fa-thumbs-up"></i>
+                    <!-- Point 3 -->
+                    <div class="bg-gray-50 p-4 rounded border-l-4 border-navy">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-award text-gold"></i>
+                            <h3 class="font-bold text-gray-800 text-sm">品牌加值</h3>
                         </div>
-                        <h3 class="font-bold text-lg text-[#003366] mb-1">形象加分</h3>
-                        <p class="text-sm text-gray-600">列入「永續優質企業」<br>應對供應鏈查核</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            協助客戶應對供應鏈查核，列入本行<span class="font-bold text-navy">「永續優質企業」</span>名單。
+                        </p>
                     </div>
                 </div>
             </section>
 
-            <!-- Section 2: 誰是客戶 & 優惠表 -->
-            <section class="flex gap-8">
-                <!-- 目標客群 -->
-                <div class="flex-1">
-                    <h2 class="text-xl font-bold text-[#003366] border-l-4 border-[#C5A065] pl-3 mb-4">目標客群 (Target)</h2>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded">
-                            <i class="fa-solid fa-user-check text-green-600 mt-1"></i>
-                            <div>
-                                <strong class="block text-gray-800">既有老客戶</strong>
-                                <span class="text-sm text-gray-500">往來滿一年以上</span>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded">
-                            <i class="fa-solid fa-file-invoice-dollar text-green-600 mt-1"></i>
-                            <div>
-                                <strong class="block text-gray-800">體質優良</strong>
-                                <span class="text-sm text-gray-500">內部信評 A/B 級以上</span>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded">
-                            <i class="fa-solid fa-leaf text-green-600 mt-1"></i>
-                            <div>
-                                <strong class="block text-gray-800">有「綠色」基因</strong>
-                                <span class="text-sm text-gray-500">有太陽能、節能標章、或被要求碳盤查</span>
-                            </div>
-                        </li>
-                    </ul>
+            <!-- 2. 目標客群 (Target Audience) -->
+            <section>
+                <div class="flex items-center gap-2 mb-3 border-b border-gray-200 pb-2">
+                    <div class="w-1 h-5 bg-gold"></div>
+                    <h2 class="text-lg font-bold text-navy">目標客群 (Target Audience)</h2>
                 </div>
+                <div class="flex gap-4 text-sm text-gray-700 bg-white border border-gray-200 p-4 rounded">
+                    <div class="flex-1 flex items-start gap-3">
+                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
+                        <div>
+                            <strong class="block text-navy mb-1">既有優質客戶</strong>
+                            <span class="text-xs text-gray-500">往來滿一年且內部信評 A/B 級以上者。</span>
+                        </div>
+                    </div>
+                    <div class="w-px bg-gray-200"></div>
+                    <div class="flex-1 flex items-start gap-3">
+                        <i class="fa-solid fa-check text-green-600 mt-1"></i>
+                        <div>
+                            <strong class="block text-navy mb-1">具備綠色基因</strong>
+                            <span class="text-xs text-gray-500">擁有太陽能設備、節能標章，或正面臨碳盤查壓力之製造業。</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                <!-- 優惠方案表 -->
-                <div class="flex-[1.5]">
-                    <h2 class="text-xl font-bold text-[#003366] border-l-4 border-[#C5A065] pl-3 mb-4">優惠方案 (Cheat Sheet)</h2>
-                    <table class="w-full text-sm border-collapse">
+            <!-- 3. 優惠方案對照表 (Pricing Table) -->
+            <section>
+                <div class="flex items-center gap-2 mb-3 border-b border-gray-200 pb-2">
+                    <div class="w-1 h-5 bg-gold"></div>
+                    <h2 class="text-lg font-bold text-navy">優惠方案與資格 (Qualification)</h2>
+                </div>
+                <div class="border border-gray-200 rounded overflow-hidden">
+                    <table class="pro-table">
                         <thead>
-                            <tr class="bg-[#003366] text-white">
-                                <th class="p-3 text-left rounded-tl-lg">客戶有什麼證書?</th>
-                                <th class="p-3 text-center">減碼幅度</th>
-                                <th class="p-3 text-center rounded-tr-lg">類別</th>
+                            <tr>
+                                <th width="20%">適用類別</th>
+                                <th width="50%">必要檢附證明文件 (需在效期內)</th>
+                                <th width="30%">利率優惠 (Spread)</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-700">
-                            <tr class="border-b border-gray-200 bg-blue-50/50">
-                                <td class="p-3 font-medium">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-certificate text-[#C5A065]"></i>
-                                        ISO 14064 (溫室氣體)<br>ISO 50001 (能源管理)
-                                    </div>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold text-navy bg-blue-50/50">類別 A (進階)</td>
+                                <td class="bg-blue-50/50">
+                                    <ul class="list-disc list-inside text-xs space-y-1">
+                                        <li>ISO 14064-1 溫室氣體盤查</li>
+                                        <li>ISO 50001 能源管理系統</li>
+                                    </ul>
                                 </td>
-                                <td class="p-3 text-center font-bold text-red-600 text-lg">- 5 bps</td>
-                                <td class="p-3 text-center"><span class="bg-[#003366] text-white px-2 py-1 rounded text-xs">類別 A</span></td>
+                                <td class="font-bold text-red-700 bg-blue-50/50 text-base">- 5 bps</td>
                             </tr>
-                            <tr class="bg-white">
-                                <td class="p-3 font-medium">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-tag text-green-600"></i>
-                                        節能標章 / 綠建築<br>太陽能發電設備
-                                    </div>
+                            <tr>
+                                <td class="font-bold text-gray-700">類別 B (入門)</td>
+                                <td>
+                                    <ul class="list-disc list-inside text-xs space-y-1">
+                                        <li>經濟部節能標章 / 綠建築標章</li>
+                                        <li>再生能源發電設備 (如太陽能板)</li>
+                                    </ul>
                                 </td>
-                                <td class="p-3 text-center font-bold text-red-600 text-lg">- 3 bps</td>
-                                <td class="p-3 text-center"><span class="bg-gray-500 text-white px-2 py-1 rounded text-xs">類別 B</span></td>
+                                <td class="font-bold text-red-700 text-base">- 3 bps</td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="mt-3 text-xs text-gray-500 bg-gray-100 p-2 rounded">
-                        <i class="fa-solid fa-circle-info mr-1"></i> 特別約定：採年度覆審制，證書失效自動恢復原價，不追回利息。
-                    </div>
+                </div>
+                <div class="mt-2 flex items-start gap-2 text-[11px] text-gray-500 bg-gray-50 p-2 rounded">
+                    <i class="fa-solid fa-circle-info mt-0.5 text-navy"></i>
+                    <span>特別約定：本優惠採年度覆審制。若證書於貸款期間失效且未補件，次期利率將自動恢復原價 (不追回既往利息)。</span>
                 </div>
             </section>
 
-            <!-- Section 3: Q&A -->
-            <section>
-                <h2 class="text-xl font-bold text-[#003366] border-l-4 border-[#C5A065] pl-3 mb-4">常見反對問題 (Q&A)</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
-                        <p class="font-bold text-[#003366] mb-2"><span class="text-[#C5A065] mr-2">Q</span>ISO 證書還在申請中？</p>
-                        <p class="text-sm text-gray-600">「那我們先送額度！等下個月證書一下來，傳真給我，馬上動撥，剛好趕上旺季資金需求！」</p>
+            <!-- 4. 常見問答 (Q&A) -->
+            <section class="flex-1">
+                <div class="flex items-center gap-2 mb-3 border-b border-gray-200 pb-2">
+                    <div class="w-1 h-5 bg-gold"></div>
+                    <h2 class="text-lg font-bold text-navy">常見問答 (Q&A)</h2>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <div class="flex-shrink-0 w-6 h-6 rounded bg-navy text-white flex items-center justify-center text-xs font-bold">Q</div>
+                        <div class="text-sm">
+                            <p class="font-bold text-gray-800 mb-1">ISO 證書還在申請中，顧問說下個月才會下來，可以先減碼嗎？</p>
+                            <p class="text-gray-600 text-xs">A: 依規定需「見證書生效」。建議先送件申請額度，待證書取得後傳真補件，即可安排動撥並適用優惠。</p>
+                        </div>
                     </div>
-                    <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
-                        <p class="font-bold text-[#003366] mb-2"><span class="text-[#C5A065] mr-2">Q</span>證書過期會罰違約金？</p>
-                        <p class="text-sm text-gray-600">「安啦！絕對不罰款。頂多是取消優惠變回原價。系統還會提早兩個月提醒您去展延，服務很周到！」</p>
+                    <div class="flex gap-3">
+                        <div class="flex-shrink-0 w-6 h-6 rounded bg-navy text-white flex items-center justify-center text-xs font-bold">Q</div>
+                        <div class="text-sm">
+                            <p class="font-bold text-gray-800 mb-1">以後證書過期忘了展延，會不會被罰違約金？</p>
+                            <p class="text-gray-600 text-xs">A: 請放心，本專案不設違約金。證書失效僅會取消利率優惠（恢復原價）。此外，系統將於到期前 60 天自動發送提醒通知。</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
         </main>
 
-        <!-- Footer: 激勵活動 -->
-        <footer class="mt-auto bg-[#C5A065] p-6 text-center relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-            <div class="relative z-10 flex justify-center items-center gap-6">
-                <div class="text-[#003366] font-black text-2xl">
-                    <i class="fa-solid fa-trophy mr-2"></i> 2026 下半年度激勵活動
+        <!-- Footer: 頁尾資訊 -->
+        <footer class="bg-gray-100 px-10 py-4 border-t border-gray-200 mt-auto">
+            <div class="flex justify-between items-center text-[10px] text-gray-500">
+                <div class="flex gap-4">
+                    <span><i class="fa-solid fa-phone mr-1"></i> 企金商品部諮詢專線: #1234</span>
+                    <span><i class="fa-solid fa-envelope mr-1"></i> pm_sme@cocobank.com</span>
                 </div>
-                <div class="text-[#003366] font-medium text-lg border-l-2 border-[#003366] pl-6">
-                    8/15 - 9/30 期間，每成功撥貸一案<br>
-                    RM 可獲得 <span class="bg-white px-2 py-0.5 rounded text-red-600 font-black">$1,000</span> 即享券！
+                <div>
+                    文件編號：MKT-2026-SME-SLL-001 | 版本：v1.0
                 </div>
             </div>
         </footer>
